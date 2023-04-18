@@ -5,3 +5,4 @@ New release for /v1.0.1+0 at 06/04/2023 17:23:13
 New release for /v1.0.1+0 at 06/04/2023 17:23:35
 New release for development/v1.0.1+0 at 06/04/2023 17:27:28
 New release for staging/v1.0.1+0 at 06/04/2023 17:27:39
+New release for production/v1.0.1+1 at 18/04/2023 17:15:38
