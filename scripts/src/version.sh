@@ -45,16 +45,18 @@ increment_build_number() {
   PRO_TAG=$(git tag -l --sort=-version:refname "${PREFIX}production/*" | head -n 1)
   STAGE_TAG=$(git tag -l --sort=-version:refname "${PREFIX}${STAGE}/*" | head -n 1)
 
+  NEW_TAG=''
+
   if [[ "$STAGE" == "production" ]]; then
     PRO_TAG_FULL=$(split_version $PRO_TAG full)
     PRO_BUILD_NUMBER=$(split_version $PRO_TAG build)
     PRO_BUILD_NUMBER_INCREMENT=$((PRO_BUILD_NUMBER + 1))
-    echo "${PREFIX}production/v${PRO_TAG_FULL}+${PRO_BUILD_NUMBER_INCREMENT}"
-    exit 0
+    NEW_TAG="${PREFIX}production/v${PRO_TAG_FULL}+${PRO_BUILD_NUMBER_INCREMENT}"
+  else
+    STAGE_TAG_FULL=$(split_version $PRO_TAG increment_patches)
+    STAGE_BUILD_NUMBER=$(split_version $STAGE_TAG build)
+    STAGE_BUILD_NUMBER_INCREMENT=$((STAGE_BUILD_NUMBER + 1))
+    NEW_TAG="${PREFIX}${STAGE}/v${STAGE_TAG_FULL}+${STAGE_BUILD_NUMBER_INCREMENT}"
   fi
-
-  STAGE_TAG_FULL=$(split_version $PRO_TAG increment_patches)
-  STAGE_BUILD_NUMBER=$(split_version $STAGE_TAG build)
-  STAGE_BUILD_NUMBER_INCREMENT=$((STAGE_BUILD_NUMBER + 1))
-  echo "${PREFIX}production/v${STAGE_TAG_FULL}+${STAGE_BUILD_NUMBER_INCREMENT}"
+  create_tag $NEW_TAG
 }
