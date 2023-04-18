@@ -3,6 +3,6 @@
 source ./main.sh
 
 # create_tag test-tag
-# delete_tag staging/v1.0.0+0
+delete_tag  PREFIX/development/v+1
 # init_version_tag
-increment_build_number '' staging
+# increment_build_number '' development
