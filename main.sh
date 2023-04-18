@@ -1,5 +1,5 @@
-source ./scripts/src/tag.sh
-source ./scripts/src/version.sh
+source ./src/tag.sh
+source ./src/version.sh
 
 init_version_tag() {
   PREFIX=''

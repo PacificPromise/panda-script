@@ -8,3 +8,4 @@ New release for staging/v1.0.1+0 at 06/04/2023 17:27:39
 New release for production/v1.0.1+1 at 18/04/2023 17:15:38
 New release for staging/v1.0.1+1 at 18/04/2023 17:16:38
 New release for staging/v1.0.1+2 at 18/04/2023 17:17:08
+New release for staging/v1.0.1+3 at 18/04/2023 21:55:46
