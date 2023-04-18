@@ -29,3 +29,18 @@ delete_tag() {
   git tag -d "$1"
   git push --delete origin "$1"
 }
+
+check_tag_format() {
+  TAG_SOURCE=$(git describe --tags)
+  REGEX_MATCH_TAGS_BUILD="(development|staging|production)\/((v|\.|\+)[0-9]*){4}"
+  if [ "${PREFIX}" ]; then
+    REGEX_MATCH_TAGS_BUILD="^.*${PREFIX}\/${REGEX_MATCH_TAGS_BUILD}$"
+  else
+    REGEX_MATCH_TAGS_BUILD="^.*${REGEX_MATCH_TAGS_BUILD}$"
+  fi
+  if [[ "$TAG_SOURCE" =~ $REGEX_MATCH_TAGS_BUILD ]]; then
+    echo "INFO: Tag name '$TAG_SOURCE' is the right format tag name for building the new version."
+  else
+    exit "ERROR: Tag name '$TAG_SOURCE' is NOT the right format tag name for building the new version."
+  fi
+}
