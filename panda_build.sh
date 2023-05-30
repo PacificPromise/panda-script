@@ -11,3 +11,7 @@ export LANG=en_US.UTF-8
 check_tag_format
 
 get_message_information
+
+is_cleanup
+
+remove_all_tag

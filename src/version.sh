@@ -46,8 +46,8 @@ increment_build_number() {
   if [[ "$1" ]]; then
     PREFIX="$1/"
   fi
-  PRO_TAG=$(git tag -l --sort=-version:refname "${PREFIX}production/*" | head -n 1)
-  STAGE_TAG=$(git tag -l --sort=-version:refname "${PREFIX}${STAGE}/*" | head -n 1)
+  PRO_TAG=$(git tag --sort=-version:refname -l "${PREFIX}production/*" | head -n 1)
+  STAGE_TAG=$(git tag --sort=-version:refname -l "${PREFIX}${STAGE}/*" | head -n 1)
 
   NEW_TAG=''
 

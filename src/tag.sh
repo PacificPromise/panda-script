@@ -44,3 +44,9 @@ check_tag_format() {
     exit "ERROR: Tag name '$TAG_SOURCE' is NOT the right format tag name for building the new version."
   fi
 }
+
+remove_all_tag() {
+  git fetch
+  git push origin --delete $(git tag -l)
+  git tag -d $(git tag -l)
+}
