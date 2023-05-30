@@ -18,3 +18,4 @@ New release for development/v1.0.1+5 at 19/04/2023 00:00:10
 New release for development/v1.0.1+6 at 19/04/2023 10:28:22
 New release for customer/development/v1.0.1+0 at 30/05/2023 16:14:55
 New release for customer/staging/v1.0.1+0 at 30/05/2023 16:15:03
+New release for customer/production/v1.0.0+0 at 30/05/2023 16:15:12
