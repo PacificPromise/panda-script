@@ -5,7 +5,7 @@ create_tag() {
   HEAD_HASH="$(git rev-parse --short HEAD)"
   {
     git add release.txt &&
-      git commit -m "LC-0/build: New release for $TAG_NAME at $(date '+%d/%m/%Y %H:%M:%S')" &&
+      git commit -m "LC-0/build: Release $TAG_NAME" &&
       git push origin $CURRENT_BRANCH &&
       git tag -a $TAG_NAME -m "New release for $TAG_NAME" &&
       git push origin $TAG_NAME
