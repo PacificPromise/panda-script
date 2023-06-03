@@ -31,6 +31,7 @@ delete_tag() {
 }
 
 check_tag_format() {
+  git fetch
   TAG_SOURCE=$(git describe --tags)
   REGEX_MATCH_TAGS_BUILD="(development|staging|production)\/((v|\.|\+)[0-9]*){4}"
   if [ "${PREFIX}" ]; then
