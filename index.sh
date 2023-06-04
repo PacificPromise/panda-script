@@ -124,7 +124,7 @@ is_cleanup() {
 }
 split_version() {
   TAG_NAME=$1
-  VERSION_TYPE=$2 # full, all, major, minor, patche, build, increment_patche
+  VERSION_TYPE=$2 # full, all, major, minor, patche, increment_patche, build, increment_build
 
   VERSION_NAME_PATH=($(grep -oE '[a-z,0-9,-.+]*' <<<"$TAG_NAME"))
   ARRAY_SIZE=${#VERSION_NAME_PATH[@]}
@@ -155,6 +155,9 @@ split_version() {
   build)
     echo ${VERSION_ARRAY[3]}
     ;;
+  increment_build)
+    echo ${VERSION_ARRAY[3]+ 1}
+    ;;
   environment)
     echo ${ENVIRONMENT}
     ;;
@@ -171,7 +174,6 @@ increment_build_number() {
     PREFIX="$1/"
   fi
   PRO_TAG=$(git tag --sort=-version:refname -l "${PREFIX}production/*" | head -n 1)
-  STAGE_TAG=$(git tag --sort=-version:refname -l "${PREFIX}${STAGE}/*" | head -n 1)
 
   NEW_TAG=''
 
@@ -181,10 +183,15 @@ increment_build_number() {
     PRO_BUILD_NUMBER_INCREMENT=$((PRO_BUILD_NUMBER + 1))
     NEW_TAG="${PREFIX}production/v${PRO_TAG_FULL}+${PRO_BUILD_NUMBER_INCREMENT}"
   else
+    STAGE_TAG=$(git tag --sort=-version:refname -l "${PREFIX}${STAGE}/*" | head -n 1)
     STAGE_TAG_FULL=$(split_version $PRO_TAG increment_patche)
-    STAGE_BUILD_NUMBER=$(split_version $STAGE_TAG build)
-    STAGE_BUILD_NUMBER_INCREMENT=$((STAGE_BUILD_NUMBER + 1))
-    NEW_TAG="${PREFIX}${STAGE}/v${STAGE_TAG_FULL}+${STAGE_BUILD_NUMBER_INCREMENT}"
+    STAGE_TAG_LATEST=$(git tag --sort=-version:refname -l "${PREFIX}${STAGE}/v${STAGE_TAG_FULL}+*" | head -n 1)
+    STAGE_BUILD_NUMBER=1
+    if [[ $STAGE_TAG_CHECK_BUILD_NUMBER ]]; then
+      STAGE_BUILD_NUMBER=$(split_version $STAGE_TAG_LATEST increment_build)
+    fi
+    echo $STAGE_BUILD_NUMBER
+    NEW_TAG="${PREFIX}${STAGE}/v${STAGE_TAG_FULL}+${STAGE_BUILD_NUMBER}"
   fi
   create_tag $NEW_TAG
 }
