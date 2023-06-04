@@ -166,7 +166,7 @@ split_version() {
     echo ${VERSION_ARRAY[3]}
     ;;
   increment_build)
-    echo ${VERSION_ARRAY[3]+ 1}
+    echo ${VERSION_ARRAY[3]} + 1 | bc
     ;;
   environment)
     echo ${ENVIRONMENT}
@@ -197,7 +197,7 @@ increment_build_number() {
     STAGE_TAG_FULL=$(split_version $PRO_TAG increment_patche)
     STAGE_TAG_LATEST=$(git tag --sort=-version:refname -l "${PREFIX}${STAGE}/v${STAGE_TAG_FULL}+*" | head -n 1)
     STAGE_BUILD_NUMBER=1
-    if [[ $STAGE_TAG_CHECK_BUILD_NUMBER ]]; then
+    if [[ $STAGE_TAG_LATEST ]]; then
       STAGE_BUILD_NUMBER=$(split_version $STAGE_TAG_LATEST increment_build)
     fi
     echo $STAGE_BUILD_NUMBER
