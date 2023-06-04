@@ -66,7 +66,6 @@ increment_build_number() {
     if [[ $STAGE_TAG_LATEST ]]; then
       STAGE_BUILD_NUMBER=$(split_version $STAGE_TAG_LATEST increment_build)
     fi
-    echo $STAGE_BUILD_NUMBER
     NEW_TAG="${PREFIX}${STAGE}/v${STAGE_TAG_FULL}+${STAGE_BUILD_NUMBER}"
   fi
   create_tag $NEW_TAG
