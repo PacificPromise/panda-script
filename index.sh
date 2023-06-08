@@ -17,6 +17,7 @@ get_message_information() {
   VERSION_FULL=$(split_version $TAG_SOURCE full)
   TAG_SOURCE="${VERSION_APPNAME}-${VERSION_ENV}-$VERSION_FULL+$VERSION_BUILD_NUMBER"
   MESSAGE_INFO="\n- App: Carz Merchant.\n- Môi trường: $VERSION_ENV.\n- Phiên bản: $VERSION_FULL.\n- Bản build số: $VERSION_BUILD_NUMBER.\n- Thằng bấm nút: ${AUTHOR}."
+  send_telegram "Anh em lên nòng chiến đấu bảo vệ Tổ Quốc, Bùm chíu bùm chíu...${MESSAGE_INFO}"
   echo $MESSAGE_INFO
 }
 send_telegram() {
