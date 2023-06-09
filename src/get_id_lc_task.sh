@@ -12,8 +12,8 @@ get_id_lc_task() {
   LOGS="${LOGS%"${LOGS##*[![:space:]]}"}"
   # Remove commas if it is the last character
   if [[ "${LOGS: -1}" == "," ]]; then
-      # Remove the comma
-      LOGS="${LOGS%,}"
+    # Remove the comma
+    LOGS="${LOGS%,}"
   fi
   echo $LOGS
 }
