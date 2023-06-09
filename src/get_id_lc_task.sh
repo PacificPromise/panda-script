@@ -2,7 +2,7 @@ get_id_lc_task() {
   TAG_NAME=$(git describe --tags)
   delimiter="/"
   RESULT=$(echo $TAG_NAME | cut -d "$delimiter" -f 2)
-  TAG_ENV_NAME_TAIL_2=$(git tag -l -n "customer/${RESULT}/*" --sort=creatordate --format "%(refname:short)" | tail -2)
+  TAG_ENV_NAME_TAIL_2=$(git tag -l -n "$1/${RESULT}/*" --sort=creatordate --format "%(refname:short)" | tail -2)
   eval "TAG_ENV_NAME_TAIL_2=($TAG_ENV_NAME_TAIL_2)"
   LOGS=$(git log --oneline $TAG_ENV_NAME_TAIL_2[1]...$TAG_ENV_NAME_TAIL_2[2])
   LOGS=$(echo $LOGS | grep --only-matching --extended-regexp 'LC-[0-9]*')
