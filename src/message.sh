@@ -16,6 +16,6 @@ get_message_information() {
   VERSION_BUILD_NUMBER=$(split_version $TAG_SOURCE build)
   VERSION_FULL=$(split_version $TAG_SOURCE full)
   TAG_SOURCE="${VERSION_APPNAME}-${VERSION_ENV}-$VERSION_FULL+$VERSION_BUILD_NUMBER"
-  MESSAGE_INFO="\n- App: Carz Merchant.\n- Môi trường: $VERSION_ENV.\n- Phiên bản: $VERSION_FULL.\n- Bản build số: $VERSION_BUILD_NUMBER.\n- Thằng bấm nút: ${AUTHOR}."
+  MESSAGE_INFO="\n- App: Carz $1.\n- Môi trường: $VERSION_ENV.\n- Phiên bản: $VERSION_FULL.\n- Bản build số: $VERSION_BUILD_NUMBER.\n- Thằng bấm nút: ${AUTHOR}."
   echo $MESSAGE_INFO
 }
